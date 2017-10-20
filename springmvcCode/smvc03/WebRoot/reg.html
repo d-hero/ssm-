@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>reg.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script>
+function chkName(obj){
+	//得到用户输入的内容
+	var val = obj.value;
+	//创建xmlHttprequest
+	var xmlHttp = new XMLHttpRequest();
+	//连接服务器
+	var url = "US?regName="+val;
+	xmlHttp.open("get",url);
+	//发出请求
+	xmlHttp.send();
+	xmlHttp.onreadystatechange=function(){
+		//服务器做好准备，并且返回的是成功的结果
+		if(xmlHttp.readyState==4 && xmlHttp.status==200){
+			//服务器返回的结果保存在responseText
+			var result = xmlHttp.responseText;
+			//将结果显示在span里面
+			document.getElementById("tip").innerHTML =result;
+		}
+	}
+}
+</script>
+  </head>
+  
+  <body>
+   用户名：<input type="text" name="uName" id="uName" onblur="chkName(this)"><span id="tip"></span>
+   密码：<input type="password" name="pwd" id="pwd" >
+   确认密码：<input type="password" name="pwd" id="pwd" > 
+    真实姓名：<input type="text" name="pwd" id="pwd" >
+  </body>
+</html>

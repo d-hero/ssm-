@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IGoodsInfoDao">
+<!-- <select id="search" resultType="GoodsInfo">
+select * from goodsinfo where 1=1
+<if test="gName!=null">
+and gName like #{gName}
+</if>
+<if test="pMin>0">
+and price &gt;=${pMin}
+</if>
+<if test="pMax>0">
+and price &lt;= ${pMax}
+</if>
+</select> -->
+<!-- where 元素的使用,可以灵活判断第一个查询语句用什么关键词进行连接 -->
+<!-- <select id="search" resultType="GoodsInfo">
+select * from goodsinfo 
+<where>
+<if test="gName!=null">
+ gName like #{gName}
+</if>
+<if test="pMin>0">
+and price &gt;=${pMin}
+</if>
+<if test="pMax>0">
+and price &lt;= ${pMax}
+</if>
+</where>
+</select> -->
+<!-- where 使用结束 -->
+<!-- trim的使用 -->
+<!-- <select id="search" resultType="GoodsInfo">
+select * from goodsinfo 
+<trim prefix="where"  prefixOverrides="and | or">
+<if test="gName!=null">
+ and gName like #{gName}
+</if>
+<if test="pMin>0">
+and price &gt;=${pMin}
+</if>
+<if test="pMax>0">
+and price &lt;= ${pMax}
+</if>
+ </trim>
+</select> -->
+<!-- choose的使用，效果等同于switch，只要有其中一个满足，就只添加满足的这一个条件 -->
+<select id="search" resultType="GoodsInfo">
+select * from goodsinfo where 1=1
+<choose>
+<when test="gName!=null and gName!=''">and gName like #{gName}</when>
+<when test="pMin>0">
+and price &gt;=${pMin}
+</when>
+<when test="pMax>0">
+and price &lt;= ${pMax}
+</when>
+</choose>
+</select>
+ <!-- trim 在更新语句中的使用，商品表，如果商品名称为空就保留原来的值，价格为0 不更新，typeId=0 b -->
+<!--  <update id="doUpdate" parameterType="GoodsInfo" >
+ update goodsinfo 
+ <trim prefix="set" suffixOverrides="," suffix=" where id=#{id}">
+ <if test="gName!=''">gName=#{gName},</if>
+ <if test="price>0">price=#{price},</if>
+ </trim>
+ </update> -->
+ <!-- trim的update的拼接 update set gName='xx',price=30, where  -->
+ 
+ <!-- 实际上set更专业，可以自动添加set,以及消除多余的, -->
+ <update id="doUpdate" parameterType="GoodsInfo" >
+ update goodsinfo 
+ <set>
+ <if test="gName!=''">gName=#{gName},</if>
+ <if test="price>0">price=#{price},</if>
+ <if test="goodsTypeInfo!=null and goodsTypeInfo.id>0">typeid=#{goodsTypeInfo.id},</if> 
+ </set>
+ where id=#{id}
+ </update>
+ <!-- foreeach的使用，处理in -->
+ <!-- checkbox ,10,15,20 -->
+ <!-- 使用范例，挑选出感兴趣的商品类型对应的商品 -->
+ <select id="searchByTypeId" resultType="GoodsInfo">
+ SELECT * FROM goodsinfo WHERE typeid in
+ <foreach collection="typeArr" index="index" item="mylike" open="(" separator="," close=")">
+ #{mylike}
+ </foreach>
+ </select>
+</mapper>

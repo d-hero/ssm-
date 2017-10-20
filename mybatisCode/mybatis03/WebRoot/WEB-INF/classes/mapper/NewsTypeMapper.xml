@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.INewsTypeDao">
+<select id="getAll" resultMap="newsTypeMap">
+SELECT nt.`typename`,n.`title` FROM newstype nt JOIN newsinfo n ON nt.`id`=n.`typeid`
+</select>
+<resultMap type="NewsTypeInfo" id="newsTypeMap">
+<result property="typeName" column="typename"/>
+<collection property="news"  resultMap="newsMap">
+</collection>
+</resultMap>
+<!-- 这里配置新闻对应的 -->
+<resultMap type="NewsInfo" id="newsMap">
+<result column="title" property="title"/>
+</resultMap>
+</mapper>

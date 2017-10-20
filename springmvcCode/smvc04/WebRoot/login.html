@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script>
+			function doLogin(){
+				var params= $("#frm1").serializeArray();
+				$.post(
+				  "doLogin",
+				  params,
+				  function(data){
+					  if(data=="ok"){
+						  location.href="index.jsp";
+					  }else{
+						  $("#tip").html(data);
+					  }
+				  }
+				)
+				
+			}
+		</script>
+	</head>
+	<body>
+		<body>
+			<span id="tip"></span>
+			<form name="form1" id="frm1">
+   用户名：<input type="text" name="uName" id="uName" >
+   密码：<input type="password" name="pwd" id="pwd" >
+   <input type="button" value="登录" onclick="doLogin()"/>
+   </form>
+	</body>
+</html>

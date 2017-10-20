@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 查看sql语句的配置 -->
+<settings>  
+  <setting name="logImpl" value="STDOUT_LOGGING"/>  
+</settings> 
+<!-- 别名的配置 -->
+<typeAliases>
+<!-- 默认别名==类名，建议配置entity所在的package即可 -->
+<package name="entity"></package> 
+ </typeAliases>
+	<mappers>
+	<mapper resource="dao/mapper/GoodsInfoMapper.xml"/>
+	</mappers>
+</configuration>

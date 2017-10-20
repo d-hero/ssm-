@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="smvc05"
+  id="myeclipse.1504767275134"
+  context-root="/smvc05"
+  j2ee-spec="6.0"
+  archive="smvc05.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

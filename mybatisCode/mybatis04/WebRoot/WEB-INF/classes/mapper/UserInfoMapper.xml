@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IUserInfoDao">
+<!-- 利用set实现有条件的更新 -->
+<update id="doUpdate" parameterType="userInfo">
+update userinfo 
+<set>
+<if test="uName!=null and uName!=''">uName=#{uName},</if>
+<if test="pwd!=null and pwd!=''">pwd=#{pwd},</if>
+nickName=#{nickName}
+</set>
+ where id=#{id}
+</update>
+</mapper>

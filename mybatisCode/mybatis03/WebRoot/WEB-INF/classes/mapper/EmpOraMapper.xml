@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IEmpOraDao">
+
+<select id="getAll" resultMap="empMap">
+select e.ename , m.ename as mname from emp e join emp m on e.mgr = m.empno
+</select>
+<resultMap type="EmpOra" id="empMap">
+<result column="ename" property="eName"/>
+<association property="manager" javaType="EmpOra" >
+<result column="mname" property="eName"/>
+</association>
+</resultMap>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.GoodsInfoMapper"><!-- 现在的namespace可以自己指定 -->
+<!-- 多对一的配置 -->
+<resultMap type="GoodsInfo" id="goodsMap">
+<!-- 进行resultmap配置的时候，查询结果集里面的列的个数>=配置的个数 -->
+<id column="id" property="id"></id>
+<result column="gName" property="gName"/>
+<result column="price" property="price"/>
+<!-- 关联到商品类型的配置 -->
+<association property="goodsTypeInfo" javaType="GoodsTypeInfo">
+<result column="typeName" property="typeName"/>
+</association>
+</resultMap>
+</mapper>

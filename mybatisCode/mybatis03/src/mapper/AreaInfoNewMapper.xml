@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IAreaInfoNewDao">
+<resultMap type="AreaInfoNew" id="AreaNewMap">
+<id property="id" column="codeid"/>
+<result property="cityName" column="cityname"/>
+<collection property="children" resultMap="cMap"></collection>
+</resultMap>
+<!-- 这里配置对应的辖区的信息 -->
+<resultMap type="AreaInfoNew" id="cMap">
+<result property="cityName" column="cname"/>
+</resultMap>
+<select id="getAll" resultMap="AreaNewMap">
+SELECT p.codeid,p.cityname,c.cityname AS cname FROM tb_da_area p JOIN tb_da_area c ON c.`parentid` =p.codeid
+ORDER BY p.codeid
+LIMIT 0,500
+</select>
+
+</mapper>

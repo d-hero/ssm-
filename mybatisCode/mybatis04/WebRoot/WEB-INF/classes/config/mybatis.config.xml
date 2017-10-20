@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 查看sql语句的配置 -->
+<settings>  
+        <setting name="logImpl" value="STDOUT_LOGGING"/>  
+    </settings> 
+<!-- 别名的配置 -->
+<typeAliases>
+<!-- 默认别名==类名，建议配置entity所在的package即可 -->
+<package name="entity"></package>
+ 
+ </typeAliases>
+	<!-- 数据库环境配置 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC">
+			</transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&amp;characterEncoding=UTF-8" />
+				<property name="username" value="root" />
+				<property name="password" value="" />
+			</dataSource>
+			<!-- <dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@192.168.13.172:1521:MYORA" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource> -->
+		</environment>
+	</environments>
+	 <!-- mapper -->
+  <mappers>
+ <mapper resource="mapper/GoodsInfoMapper.xml"/>
+<mapper resource="mapper/UserInfoMapper.xml"/>
+ <mapper resource="mapper/EmpOraMapper.xml"/>
+  </mappers>
+</configuration>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IAreaInfoDao">
+<resultMap type="AreaInfo" id="AreaMap">
+<id column="codeid" property="id"/>
+<result column="cityName" property="cityName"/>
+<association property="fathercity" javaType="AreaInfo">
+<result column="fatherName" property="cityName"/>
+</association>
+</resultMap>
+
+<select id="getAll" resultMap="AreaMap">
+select t1.codeid,t1.cityName,t2.cityName as fatherName from tb_da_area t1,tb_da_area t2 where t1.parentid=t2.codeid
+</select>
+
+</mapper>

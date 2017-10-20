@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IEmInfoDao">
+
+<select id="getAll" resultMap="empMap">
+SELECT e.*,d.deptName FROM empinfo e JOIN deptinfo d ON e.deptId = d.id	
+</select>
+<!-- 这里配置与getAll关联的结果 -->
+<resultMap type="EmpInfo" id="empMap">
+<id property="id"  column="id"></id>
+<result property="eName" column="ename"/>
+<!-- 这里配置关联的部门 -->
+<association property="deptInfo" javaType="DeptInfo">
+<id property="id" column="deptId"/>
+<result property="deptName" column="deptName"/>
+</association>
+</resultMap>
+</mapper>

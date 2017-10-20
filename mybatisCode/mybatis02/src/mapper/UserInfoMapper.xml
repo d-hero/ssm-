@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IUserInfoDao">
+<select id="doLogin" resultType="ui" parameterType="ui">
+select * from userinfo where uName=#{uName} and pwd=#{pwd}
+</select>
+<select id="getUserCount" resultType="int">
+SELECT COUNT(*) FROM userinfo
+</select>
+<!-- 方法参数2个以上,parameterType不用出现 -->
+<select id="doLogin02" resultType="ui">
+select * from userinfo where uName=#{name1} and pwd=#{pwd1}
+</select>
+<!-- 分页的查询结果 -->
+<select id="getByPage" resultType="ui">
+SELECT * FROM userinfo LIMIT ${m},${n}
+</select>
+</mapper>
